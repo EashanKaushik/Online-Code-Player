@@ -1,0 +1,134 @@
+
+
+<html>
+
+    <head>
+        
+        <title>Online-Code-Player</title>
+ 
+        <script type="text/javascript" src="jquery.min.js"></script>
+        
+        <script src="jquery-ui/jquery-ui.js"></script>
+        
+        <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+		
+		<style type="text/css">
+			body{
+				margin:0;
+				padding:0;
+			}
+			#header{
+				background-color:#EDEDED;
+				width:1370px;
+				height:30px;
+			}
+			.components{
+				border-radius:7%;
+				float:left;
+				width: 80px;
+				height:26px;
+				border: 1px solid black;
+			}
+			#text{
+				font-size:25px;
+				text-align: center;
+				vertical-align: middle;
+				line-height: 26px;
+			}
+			.center {
+			  margin: auto;
+			  width: 338px;
+			  height:26px;
+			 }
+			 #h{
+				font-weight:bold;
+				float:left;
+				margin-left:10px;
+				width:30px;
+				height:26px;
+				font-size:25px
+			 }
+			.active{
+				background-color:#E8F2FF
+			}
+			.highlighted{
+				background-color:grey;
+			}
+			textarea{
+				resize:none;
+			}
+			.panel{
+				float:left;
+				border-color:grey;
+				border-top:none;
+				border-left:none;
+			}
+			iframe{
+				border:none;
+			}
+			.hidden{
+				display:none;
+			}
+		</style>
+        
+       
+        
+    </head>
+
+    <body>
+      
+		<div id="header">
+			<div id="h">CodePlayer </div>
+			<div class="center" id="text">
+				<div class="Components active" id="html">
+					<span>Html</span>
+				</div>
+				<div class="Components" id="css">
+					<span>CSS</span>
+				</div >
+				<div class="Components" id="javas">
+					<span>JavaS</span>
+				</div>
+				<div class="Components active" id="output">
+					<span>Output</span>
+				</div>
+			</div>
+		</div>
+		<div id="bodyconent">
+			<textarea class="panel" id="htmlpanel"><p>Hello</p></textarea>
+			<textarea class="panel hidden" id="csspanel">p{color:green;}</textarea>
+			<textarea class="panel hidden" id="javaspanel"></textarea>
+			<iframe class="panel" id="outputpanel"></iframe>
+		</div>
+		<script type="text/javascript">
+			function updateInfo(){
+				$("iframe").contents().find("html").html("<html><head><style type='text/css'>"+$("#csspanel").val()+"</style></head><body>"+$("#htmlpanel").val()+"</body></html>");
+				document.getElementById("outputpanel").contentWindow.eval($("#javaspanel").val());
+			}
+			$(".components").hover(function(){
+				$(this).addClass("highlighted");
+			}, function(){
+				$(this).removeClass("highlighted");
+			})
+			$(".Components").click(function(){
+				$(this).toggleClass("active");
+				$(this).removeClass("highlighted")
+				var panelId=$(this).attr("id")+"panel";
+				$("#"+panelId).toggleClass("hidden");
+				
+				var naumberOfActive=4-$('.hidden').length;
+				$(".panel").width(($(document).width()/naumberOfActive)-15)
+
+			})
+			$(".panel").height(($(document).height()-$("#header").height())-2);
+			$(".panel").width(($(document).width()/2)-15)
+			updateInfo();
+			$("textarea").on('change keyup paste', function() {
+				updateInfo();
+			});
+
+		</script>
+        
+    </body>
+
+</html>

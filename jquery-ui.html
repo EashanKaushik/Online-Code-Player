@@ -1,0 +1,80 @@
+
+
+<html>
+
+    <head>
+        
+        <title>jQuery</title>
+ 
+        <script type="text/javascript" src="jquery.min.js"></script>
+        
+        <script src="jquery-ui/jquery-ui.js"></script>
+        
+        <link href="jquery-ui/jquery-ui.css" rel="stylesheet">
+		
+		<style type="text/css">
+			#wrapper{
+				border: 1px black solid;
+				height:200px;
+				width: 200px;
+				float:right;
+			}
+			#drag{
+				border: 1px green solid;
+				height:100px;
+				width: 100px;
+				float:left;
+			}
+			#clear{
+				clear:both;
+			}
+		</style>
+        
+        
+        
+    </head>
+
+    <body>
+        
+       <div id="wrapper"></div>
+	   <div id="drag" ></div>
+	   <div id="clear"></div>
+	   <div id="accord">
+			<h3>section-1</h3>
+			<p>sdgkjsdvfdbm</p>
+
+			<h3>section-2</h3>
+			<p>sdgkjsdvfdbm</p>
+
+			<h3>section-3</h3>
+			<p>sdgkjsdvfdbm</p>
+
+			<h3>section-4</h3>
+			<p>sdgkjsdvfdbm</p>
+
+		</div>
+        
+        <script type="text/javascript">
+            
+				$("#drag").draggable();
+				$( "#wrapper" ).droppable({
+					drop: function( event, ui ) {
+						$(this).animate({
+							width:"300px",
+							height:"300px"
+						},2000,function(){
+							$(this).css("background-color","red")
+						})
+					}
+				})
+				
+				$( function() {
+					$( "#accord" ).accordion();
+				  } )				
+				           
+            
+        </script>
+        
+    </body>
+
+</html>
